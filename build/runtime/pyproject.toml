@@ -1,0 +1,11 @@
+[project]
+name = "novamart-agentcore-runtime"
+version = "0.1.0"
+description = "NovaMart multi-agent support system - AgentCore Runtime package"
+requires-python = ">=3.12"
+dependencies = [
+  "strands-agents>=1.0",
+  "bedrock-agentcore>=0.1",
+  "boto3>=1.42",
+  "python-dotenv>=1.0",
+]

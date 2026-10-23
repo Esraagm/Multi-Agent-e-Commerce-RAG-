@@ -1,0 +1,49 @@
+
+Deploy the stack
+Navigate to AWS Console → CloudFormation → Create stack → With new resources (standard)
+Select Upload a template file → choose infrastructure/starter_stack.yaml → Next
+Stack name: udacity-agentcore → Next
+Leave stack options as defaults → Next
+On the review page, check "I acknowledge that AWS CloudFormation might create IAM resources with custom names"
+Click Submit
+Wait for stack status to reach CREATE_COMPLETE
+
+
+cd C:\MyEnviro\ML\proj3\cd14764-aws-agentic-c3-classroom\project\starter                                                   
+
+python infrastructure/seed_data.py
+python -m venv venv
+venv\Scripts\Activate.ps1   
+
+pip install -r requirements.txt
+     
+cp .env.example .env
+                                                                                          
+$env:Path += ";C:\Program Files\nodejs;$env:APPDATA\npm"                                                                   
+node --version                                                                                                             
+agentcore --version   
+  
+python config.py
+
+pip install aws-xray-sdk
+pip install aws-opentelemetry-distro 
+
+python src/agent_orchestrator.py deploy                                                                                    
+python tests/test_agent.py all                                                                                             
+python src\agent_orchestrator.py test
+
+$env:AGENT_OBSERVABILITY_ENABLED="true"                                                                                    
+$env:OTEL_PYTHON_DISTRO="aws_distro"                                                                                    
+$env:OTEL_PYTHON_CONFIGURATOR="aws_configurator"                                                                        
+$env:OTEL_EXPORTER_OTLP_PROTOCOL="http/protobuf"                                                                        
+$env:OTEL_TRACES_EXPORTER="otlp"                                                                                        
+$env:OTEL_RESOURCE_ATTRIBUTES="service.name=novamart-support"  
+$env:OTEL_LOGS_EXPORTER="none"
+$env:OTEL_EXPORTER_OTLP_TRACES_ENDPOINT="https://xray.us-east-1.amazonaws.com/v1/traces"                               
+$env:OTEL_SERVICE_NAME="novamart-support"
+
+opentelemetry-instrument python src\agent_orchestrator.py test   
+
+export OTEL_PYTHON_DISTRO=aws_distro OTEL_PYTHON_CONFIGURATOR=aws_configurator                                   
+  
+                                                                                 

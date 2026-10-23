@@ -1,0 +1,58 @@
+(venv) PS C:\MyEnviro\ML\proj3\cd14764-aws-agentic-c3-classroom\project\starter> python tests/test_agent.py task5                         
+                                                                                                             
+───────────────────────────────────────────────────────
+  Task 5 - Bedrock Knowledge Bases
+───────────────────────────────────────────────────────
+  ✓ PASS [+5pts] RETURNS_KB_ID is set in environment (K6NCOCEJPM)
+  ✓ PASS [+0pts] Returns Knowledge Base is ACTIVE
+  ✓ PASS [+0pts] Returns KB uses amazon.titan-embed-text-v2:0
+  ✓ PASS [+0pts] Returns KB data source has a completed sync
+  ✓ PASS [+5pts] SHIPPING_KB_ID is set in environment (LYU0P3Y6QZ)
+  ✓ PASS [+0pts] Shipping Knowledge Base is ACTIVE
+  ✓ PASS [+0pts] Shipping KB uses amazon.titan-embed-text-v2:0
+  ✓ PASS [+0pts] Shipping KB data source has a completed sync
+  ✓ PASS [+5pts] WARRANTY_KB_ID is set in environment (I7ZHQ9ZZ6N)
+  ✓ PASS [+0pts] Warranty Knowledge Base is ACTIVE
+  ✓ PASS [+0pts] Warranty KB uses amazon.titan-embed-text-v2:0
+  ✓ PASS [+0pts] Warranty KB data source has a completed sync
+  ✓ PASS [+5pts] All three Knowledge Bases return passages for a policy question
+    [PARALLEL RETRIEVAL - START]  Spawning 3 sub-agents concurrently via ThreadPoolExecutor
+    ──────────────────────────────────────────────────────
+    +-- [SUB-AGENT 01]  ReturnsRetriever   KB-ID: K6NCOCEJPM
+    +-- [SUB-AGENT 02]  ShippingRetriever  KB-ID: LYU0P3Y6QZ
+    +-- [SUB-AGENT 03]  WarrantyRetriever  KB-ID: I7ZHQ9ZZ6N
+    Retrieving in parallel... (sub-agent output suppressed - clean results printed sequentially after [END])
+    ──────────────────────────────────────────────────────
+    [PARALLEL RETRIEVAL - END]  All 3 KBs responded  Elapsed: 8.6s
+
+    [SUB-AGENT 01]  ReturnsRetriever   KB: K6NCOCEJPM
+      | Based on the retrieved returns policy:
+      | **Return Window for Premium Customers:**
+      | Premium tier customers receive an **extended 60-day return window** (compared to the standard 30-day window for regular customers).
+      | **Warranty:**
+      | - **Standard warranty:** All NovaMart products come with a **1-year limited warranty** against manufacturing defects
+      | - **Electronics:** Carry a **2-year warranty** (standard customers)
+      | - **Premium customers - Electronics:** Receive an automatic **3-year warranty** on all electronics
+      | So premium customers get both a longer return window (60 days) and an extended warranty on electronics (3 years instead of 2 years).
+
+    [SUB-AGENT 02]  ShippingRetriever  KB: LYU0P3Y6QZ
+      | Based on the retrieved shipping policy:
+      | **Return Window for Premium Customers:**
+      | Premium tier customers receive an extended **60-day return window** (compared to the standard 30-day window for regular customers).
+      | **Warranty:**
+      | Premium tier customers receive an automatic **3-year warranty on electronics**. 
+      | For context, the policy also notes that standard customers receive a 1-year limited warranty on most products and a 2-year warranty on electronics.
+
+    [SUB-AGENT 03]  WarrantyRetriever  KB: I7ZHQ9ZZ6N
+      | Based on the retrieved warranty policy:
+      | **Return Window for Premium Customers:**
+      | Premium tier customers receive an **extended 60-day return window** (compared to the standard 30-day window for regular customers).
+      | **Warranty Length:**
+      | Premium tier customers receive an **automatic 3-year warranty on all electronics**. For non-electronics products, the standard warranty applies, which is a **1-year limited warranty** against manufacturing defects.
+  ✓ PASS [+5pts] search_all_policies() returned combined results from the three retrievers (8.7s)
+
+═══════════════════════════════════════════════════════
+  Score: 25/25 pts (100%)
+═══════════════════════════════════════════════════════
+
+  🎉 Perfect score! All tasks complete.
